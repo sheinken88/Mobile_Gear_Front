@@ -21,10 +21,15 @@ import { Link } from "react-router-dom";
 import useInput from "../hooks/useInput";
 import { useSelector } from "react-redux";
 
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "../state/products/productsActions";
+
 export const Navbar = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const userData = useSelector((state) => state.user.userData);
   const isAdmin = useSelector((state) => state.user.isAdmin); // falta agregar las opciones de admin en el menu de user
+
+  const dispatch = useDispatch();
 
   const searchInput = useInput();
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -35,7 +40,8 @@ export const Navbar = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    // resto del código para manejar el search submit.
+    dispatch(fetchProducts(searchInput.value));
+    searchInput.reset();
   };
 
   return (
@@ -80,10 +86,10 @@ export const Navbar = () => {
             </MenuButton>
             <MenuList>
               <MenuItem as={Link} to="/">
-                iPad Mini 4
+                Samsung
               </MenuItem>
               <MenuItem as={Link} to="/">
-                iPad Mini 9.7
+                iPad
               </MenuItem>
             </MenuList>
           </Menu>
@@ -108,7 +114,7 @@ export const Navbar = () => {
               {showSearchBar && (
                 <Input
                   {...searchInput}
-                  placeholder="Search"
+                  placeholder="Buscar por modelo"
                   variant="filled"
                   size="md"
                   borderRadius="full"

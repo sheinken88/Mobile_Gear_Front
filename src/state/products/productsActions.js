@@ -8,7 +8,7 @@ export const fetchProducts =
     dispatch(setLoading(true));
     try {
       const response = await axios.get(
-        `${settings.axiosURL}/api/products?search=${searchTerm}`
+        `${settings.axiosURL}/products?modelName=${searchTerm}`
       );
       dispatch(setProducts(response.data));
     } catch {
