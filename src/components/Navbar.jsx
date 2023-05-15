@@ -14,15 +14,18 @@ import {
   Input,
   IconButton,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 import { SearchIcon } from "@chakra-ui/icons";
 import { FaShoppingCart } from "react-icons/fa";
 
+import { Link } from "react-router-dom";
 import useInput from "../hooks/useInput";
+import { useSelector } from "react-redux";
 
 export const Navbar = () => {
-  const isAuthenticated = false;
-  const isAdmin = false;
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const userData = useSelector((state) => state.user.userData);
+  const isAdmin = useSelector((state) => state.user.isAdmin); // falta agregar las opciones de admin en el menu de user
+
   const searchInput = useInput();
   const [showSearchBar, setShowSearchBar] = useState(false);
 
@@ -42,7 +45,8 @@ export const Navbar = () => {
         alignItems="center"
         gap="2"
         p="4"
-        backgroundColor="#E91E63"
+        // backgroundColor="#E91E63"
+        backgroundColor="#EC4E20"
       >
         <Box p="2">
           <Heading
@@ -62,7 +66,7 @@ export const Navbar = () => {
               Celulares
             </MenuButton>
             <MenuList>
-              <MenuItem as={Link} to="/">
+              <MenuItem as={Link} to="/" _hover={{ color: "#F7DC6F" }}>
                 Samsung
               </MenuItem>
               <MenuItem as={Link} to="/">
@@ -122,8 +126,8 @@ export const Navbar = () => {
                 borderRadius="full"
                 bg="secondary"
                 color="white"
-                _hover={{ bg: "#0097A7" }}
-                _active={{ bg: "#00838F" }}
+                _hover={{ bg: "#3498DB" }}
+                _active={{ bg: "#3498DB" }}
                 onClick={toggleSearchBar}
               />
               <IconButton
@@ -133,8 +137,8 @@ export const Navbar = () => {
                 borderRadius="full"
                 bg="secondary"
                 color="white"
-                _hover={{ bg: "#0097A7" }}
-                _active={{ bg: "#00838F" }}
+                _hover={{ bg: "#3498DB" }}
+                _active={{ bg: "#3498DB" }}
               />
             </Flex>
           </form>
@@ -142,7 +146,7 @@ export const Navbar = () => {
         {isAuthenticated ? (
           <Menu>
             <MenuButton fontSize="2xl" color="white">
-              {"userName"}
+              {userData.userName}
             </MenuButton>
             <MenuList>
               <MenuItem as={Link} to="/">
@@ -166,7 +170,9 @@ export const Navbar = () => {
               </Button>
             </Link>
             <Link to="/login">
-              <Button colorScheme="whiteAlpha">Log in</Button>
+              <Button backgroundColor="#3498DB" color="white">
+                Log in
+              </Button>
             </Link>
           </ButtonGroup>
         )}
