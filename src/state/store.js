@@ -6,7 +6,7 @@ import userReducer from "./user/userSlice";
 export default configureStore({
   reducer: {
     user: userReducer,
-    products: productsReducer,
-    cart: cartReducer,
+    // products: productsReducer,
+    // cart: cartReducer,
   },
 });
