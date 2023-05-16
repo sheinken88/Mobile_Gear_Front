@@ -23,6 +23,9 @@ import { useSelector } from "react-redux";
 
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "../state/products/productsActions";
+import { useNavigate } from "react-router-dom";
+
+import { logoutUser } from "../state/user/userActions";
 
 export const Navbar = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -30,6 +33,7 @@ export const Navbar = () => {
   const isAdmin = useSelector((state) => state.user.isAdmin); // falta agregar las opciones de admin en el menu de user
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const searchInput = useInput();
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -42,6 +46,11 @@ export const Navbar = () => {
     e.preventDefault();
     dispatch(fetchProducts(searchInput.value));
     searchInput.reset();
+  };
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    navigate("/");
   };
 
   return (
@@ -163,7 +172,7 @@ export const Navbar = () => {
               </MenuItem>
               <MenuDivider />
 
-              <MenuItem as={Link} to="/">
+              <MenuItem as={Link} to="/" onClick={handleLogout}>
                 Log out
               </MenuItem>
             </MenuList>
