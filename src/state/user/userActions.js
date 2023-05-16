@@ -4,7 +4,7 @@ import * as settings from "../../settings";
 
 export const registerUser = (userName, email, password) => async (dispatch) => {
   try {
-    const response = await axios.post(`${settings.axiosURL}/api/users/signup`, {
+    const response = await axios.post(`${settings.axiosURL}/users/signup`, {
       userName,
       email,
       password,
@@ -25,7 +25,7 @@ export const loginUser = (email, password) => async (dispatch) => {
     });
 
     const userData = response.data;
-    dispatch(login(userData));
+    await dispatch(login(userData));
   } catch (error) {
     console.error("Login error:", error);
   }
