@@ -152,7 +152,7 @@ export const Navbar = () => {
         {isAuthenticated ? (
           <Menu>
             <MenuButton fontSize="2xl" color="white">
-              {userData.userName}
+              {userData.email}
             </MenuButton>
             <MenuList>
               <MenuItem as={Link} to="/">

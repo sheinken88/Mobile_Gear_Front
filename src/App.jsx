@@ -11,10 +11,26 @@ import { Footer } from "./components/Footer";
 import { Login } from "./components/Login";
 import { SignUp } from "./components/SignUp";
 import { Box } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import * as settings from "../src/settings";
+import { login } from "./state/user/userSlice";
+
+import { useDispatch } from "react-redux";
 
 function App() {
-  const isAuthenticated = false;
-  const isAdmin = false;
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const userData = useSelector((state) => state.user.userData);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function fetchUser() {
+      const user = await axios.get(`${settings.axiosURL}/me`);
+      await dispatch(login(user.data));
+    }
+    fetchUser();
+  }, []);
 
   return (
     <BrowserRouter>
@@ -33,7 +49,7 @@ function App() {
               <Route path="/order-history" element={<OrderHistory />} />
             </>
           )}
-          {isAdmin && <Route path="/admin" element={<Admin />} />}
+          {/* {isAdmin && <Route path="/admin" element={<Admin />} />} */}
         </Routes>
         <Footer />
       </Box>
