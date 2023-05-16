@@ -18,10 +18,12 @@ export const Login = () => {
   const email = useInput();
   const password = useInput();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
     dispatch(loginUser(email.value, password.value));
+    navigate("/");
   };
 
   return (
