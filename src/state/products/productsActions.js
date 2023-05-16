@@ -10,6 +10,7 @@ export const fetchProducts =
       const response = await axios.get(
         `${settings.axiosURL}/products?modelName=${searchTerm}`
       );
+      console.log("Response: ", response);
       dispatch(setProducts(response.data));
     } catch {
       dispatch(setError(error.message));
