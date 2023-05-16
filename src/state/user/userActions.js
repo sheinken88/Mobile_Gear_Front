@@ -19,7 +19,7 @@ export const registerUser = (userName, email, password) => async (dispatch) => {
 
 export const loginUser = (email, password) => async (dispatch) => {
   try {
-    const response = await axios.post(`${settings.axiosURL}/api/users/login`, {
+    const response = await axios.post(`${settings.axiosURL}/users/login`, {
       email,
       password,
     });
