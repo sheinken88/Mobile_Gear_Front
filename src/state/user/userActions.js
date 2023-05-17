@@ -25,7 +25,7 @@ export const loginUser = (email, password) => async (dispatch) => {
       password,
     });
 
-    const payload = await axios.get(`${settings.axiosURL}/secret`);
+    const payload = await axios.get(`${settings.axiosURL}/users/secret`);
     console.log("PAYLOAD: ", payload.data);
 
     const userData = payload.data;
@@ -37,7 +37,7 @@ export const loginUser = (email, password) => async (dispatch) => {
 
 export const logoutUser = () => async (dispatch) => {
   try {
-    await axios.post(`${settings.axiosURL}/logout`);
+    await axios.post(`${settings.axiosURL}/users/logout`);
 
     dispatch(logout());
   } catch (error) {

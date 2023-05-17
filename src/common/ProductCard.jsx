@@ -1,8 +1,11 @@
 import { Box, Image, Badge, Flex, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export const ProductCard = ({ product }) => {
   return (
     <Box
+      as={Link}
+      to={`/products/${product.id}`}
       maxW="sm"
       borderWidth="1px"
       borderRadius="lg"
