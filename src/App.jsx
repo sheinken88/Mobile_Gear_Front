@@ -26,7 +26,7 @@ function App() {
 
   useEffect(() => {
     async function fetchUser() {
-      const user = await axios.get(`${settings.axiosURL}/me`);
+      const user = await axios.get(`${settings.axiosURL}/users/me`);
       await dispatch(login(user.data));
     }
     fetchUser();
