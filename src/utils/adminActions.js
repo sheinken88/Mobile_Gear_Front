@@ -1,7 +1,9 @@
 import axios from "axios";
+import * as settings from "../settings/index";
 
 export const addProduct =
-  (name, description, price, discount, features, product_img) => async () => {
+  (name, description, price, discount, features, product_img, stock) =>
+  async () => {
     try {
       await axios.post(`${settings.axiosURL}/admin/products`, {
         name,
@@ -10,6 +12,7 @@ export const addProduct =
         discount,
         features,
         product_img,
+        stock,
       });
     } catch (error) {
       console.error("Login error:", error);

@@ -1,7 +1,16 @@
 import React from "react";
-
-import { addProduct } from "../../utils/adminActions";
+import {
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
+  Stack,
+  Button,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import useInput from "../../hooks/useInput";
+import { addProduct } from "../../utils/adminActions";
 
 export const ProductManagement = () => {
   const name = useInput();
@@ -10,8 +19,9 @@ export const ProductManagement = () => {
   const features = useInput();
   const price = useInput();
   const discount = useInput();
+  const stock = useInput();
 
-  const handleAddProduct = async (e) => {
+  const handleAddProduct = (e) => {
     e.preventDefault();
 
     const productData = {
@@ -21,44 +31,86 @@ export const ProductManagement = () => {
       features: features.value,
       price: parseFloat(price.value),
       discount: parseInt(discount.value),
+      stock: Number(stock.value),
     };
 
-    await addProduct(productData);
+    addProduct(productData)();
   };
 
   return (
-    <form onSubmit={handleAddProduct}>
-      <label htmlFor="name">Nombre:</label>
-      <input type="text" id="name" {...name} required />
-      <br />
-      <br />
+    <Box
+      p={8}
+      borderWidth={1}
+      borderRadius="lg"
+      boxShadow="lg"
+      bg={useColorModeValue("white", "gray.700")}
+      maxW="md"
+      mx="auto"
+      mt="10"
+    >
+      <form onSubmit={handleAddProduct}>
+        <Stack spacing={6}>
+          <FormControl isRequired>
+            <FormLabel>Model Name</FormLabel>
+            <Input id="name" {...name} placeholder="Name" />
+          </FormControl>
 
-      <label htmlFor="product_img">Imagen:</label>
-      <input type="text" id="product_img" {...product_img} />
-      <br />
-      <br />
+          <FormControl>
+            <FormLabel>Image</FormLabel>
+            <Input id="product_img" {...product_img} placeholder="Image URL" />
+          </FormControl>
 
-      <label htmlFor="description">Descripción:</label>
-      <textarea id="description" {...description} required></textarea>
-      <br />
-      <br />
+          <FormControl isRequired>
+            <FormLabel>Description</FormLabel>
+            <Textarea
+              id="description"
+              {...description}
+              placeholder="Description"
+            />
+          </FormControl>
 
-      <label htmlFor="features">Características:</label>
-      <textarea id="features" {...features}></textarea>
-      <br />
-      <br />
+          <FormControl>
+            <FormLabel>Features</FormLabel>
+            <Textarea id="features" {...features} placeholder="Features" />
+          </FormControl>
 
-      <label htmlFor="price">Precio:</label>
-      <input type="number" id="price" step="0.01" {...price} required />
-      <br />
-      <br />
+          <FormControl isRequired>
+            <FormLabel>Price</FormLabel>
+            <Input
+              id="price"
+              type="number"
+              step="0.01"
+              {...price}
+              placeholder="Price"
+            />
+          </FormControl>
 
-      <label htmlFor="discount">Descuento:</label>
-      <input type="number" id="discount" {...discount} />
-      <br />
-      <br />
+          <FormControl>
+            <FormLabel>Discount</FormLabel>
+            <Input
+              id="discount"
+              type="number"
+              {...discount}
+              placeholder="Discount"
+            />
+          </FormControl>
 
-      <button type="submit"> Add </button>
-    </form>
+          <FormControl>
+            <FormLabel>Stock</FormLabel>
+            <Input id="stock" type="number" {...stock} placeholder="Stock" />
+          </FormControl>
+
+          <Button
+            type="submit"
+            backgroundColor="#3498DB"
+            size="lg"
+            fontSize="md"
+            color="white"
+          >
+            Add Product
+          </Button>
+        </Stack>
+      </form>
+    </Box>
   );
 };
