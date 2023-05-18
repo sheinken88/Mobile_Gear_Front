@@ -21,6 +21,8 @@ import { useDispatch } from "react-redux";
 
 function App() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+
+  const is_admin = useSelector((state) => state.user.is_admin);
   const userData = useSelector((state) => state.user.userData);
   const dispatch = useDispatch();
 
@@ -49,7 +51,7 @@ function App() {
               <Route path="/order-history" element={<OrderHistory />} />
             </>
           )}
-          {/* {isAdmin && <Route path="/admin" element={<Admin />} />} */}
+          {is_admin && <Route path="/admin" element={<Admin />} />}
         </Routes>
         <Footer />
       </Box>

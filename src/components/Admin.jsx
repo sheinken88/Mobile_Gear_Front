@@ -1,5 +1,6 @@
 import React from "react";
+import { ProductManagement } from "./Admin/ProductManagement";
 
 export const Admin = () => {
-  return <div>Admin</div>;
+  return <ProductManagement />;
 };
