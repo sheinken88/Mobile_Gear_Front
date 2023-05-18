@@ -3,10 +3,10 @@ axios.defaults.withCredentials = true;
 import { login, logout, register } from "./userSlice";
 import * as settings from "../../settings";
 
-export const registerUser = (userName, email, password) => async (dispatch) => {
+export const registerUser = (username, email, password) => async (dispatch) => {
   try {
     const response = await axios.post(`${settings.axiosURL}/users/signup`, {
-      userName,
+      username,
       email,
       password,
     });

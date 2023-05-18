@@ -26,7 +26,7 @@ export const ProductCard = ({ product }) => {
         </Badge>
       )}
 
-      <Image src={product.productImage} alt={product.modelName} />
+      <Image src={product.product_img} alt={product.name} />
 
       <Flex
         mt={2}
@@ -35,7 +35,7 @@ export const ProductCard = ({ product }) => {
         flexDirection="column"
       >
         <Text fontSize="xl" fontWeight="semibold" mb={2}>
-          {product.modelName}
+          {product.name}
         </Text>
 
         <Text fontWeight="bold" fontSize="2xl">
