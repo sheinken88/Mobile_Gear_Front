@@ -45,7 +45,7 @@ export const Navbar = () => {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     dispatch(fetchProducts(searchInput.value));
-    searchInput.reset();
+    searchInput.reset(); //revisar
   };
 
   const handleLogout = () => {
