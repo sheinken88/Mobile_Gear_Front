@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProduct } from "../state/products/productsActions";
@@ -19,15 +19,28 @@ export const ProductDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector((state) => state.products.product);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     dispatch(fetchProduct(id));
     console.log("Product: ", product);
   }, [id]);
 
-  if (!product || !product.brand.name) {
+  if (!product || !product.brand) {
     return <div>Loading...</div>;
   }
+
+  const increment = () => {
+    setCount(count + 1);
+  };
+
+  const decrement = () => {
+    setCount(count - 1);
+  };
+
+  const handleAddToCart = () => {
+    // dispatch al cartSlice
+  };
 
   return (
     <Flex p="20">
@@ -54,13 +67,25 @@ export const ProductDetail = () => {
         <Divider mt="5" mb="5" />
         <Flex align="center" justify="space-between">
           <Flex>
-            <IconButton aria-label="Decrease" icon={<MinusIcon />} />
+            <IconButton
+              onClick={decrement}
+              aria-label="Decrease"
+              icon={<MinusIcon />}
+            />
             <Box border="1px solid" borderColor="gray.200" px="2" py="1" mx="2">
-              {/* contador */}1
+              {count}
             </Box>
-            <IconButton aria-label="Increase" icon={<AddIcon />} />
+            <IconButton
+              onClick={increment}
+              aria-label="Increase"
+              icon={<AddIcon />}
+            />
           </Flex>
-          <Button backgroundColor="#3498DB" color="white">
+          <Button
+            onClick={handleAddToCart}
+            backgroundColor="#3498DB"
+            color="white"
+          >
             Add to cart
           </Button>
         </Flex>

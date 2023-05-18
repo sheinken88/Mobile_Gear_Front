@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isAuthenticated: false,
   userData: null,
-  // isAdmin: false,
+  is_admin: false,
 };
 
 const userSlice = createSlice({
@@ -13,17 +13,17 @@ const userSlice = createSlice({
     register: (state, action) => {
       state.isAuthenticated = true;
       state.userData = action.payload;
-      // state.isAdmin = action.payload.isAdmin;
+      state.is_admin = action.payload.is_admin;
     },
     login: (state, action) => {
       state.isAuthenticated = true;
       state.userData = action.payload;
-      // state.isAdmin = action.payload.isAdmin;
+      state.is_admin = action.payload.is_admin;
     },
     logout: (state) => {
       state.isAuthenticated = false;
       state.userData = null;
-      // state.isAdmin = false;
+      state.is_admin = false;
     },
   },
 });
