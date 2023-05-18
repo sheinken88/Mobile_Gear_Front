@@ -30,7 +30,7 @@ import { logoutUser } from "../state/user/userActions";
 export const Navbar = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const userData = useSelector((state) => state.user.userData);
-  const isAdmin = useSelector((state) => state.user.isAdmin); // falta agregar las opciones de admin en el menu de user
+  const is_admin = useSelector((state) => state.user.is_admin); // falta agregar las opciones de admin en el menu de user
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -167,9 +167,15 @@ export const Navbar = () => {
               <MenuItem as={Link} to="/">
                 Account
               </MenuItem>
-              <MenuItem as={Link} to="">
-                My list
-              </MenuItem>
+              {is_admin ? (
+                <MenuItem as={Link} to="/admin">
+                  My dashboard
+                </MenuItem>
+              ) : (
+                <MenuItem as={Link} to="">
+                  My list
+                </MenuItem>
+              )}
               <MenuDivider />
 
               <MenuItem as={Link} to="/" onClick={handleLogout}>
