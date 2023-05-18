@@ -21,13 +21,13 @@ import {
 export const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userName = useInput();
+  const username = useInput();
   const email = useInput();
   const password = useInput();
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    await dispatch(registerUser(userName.value, email.value, password.value));
+    await dispatch(registerUser(username.value, email.value, password.value));
     navigate("/login");
   };
 
@@ -46,7 +46,7 @@ export const SignUp = () => {
         <Stack spacing={6}>
           <FormControl isRequired>
             <FormLabel>UserName</FormLabel>
-            <Input {...userName} placeholder="UserName" />
+            <Input {...username} placeholder="UserName" />
           </FormControl>
 
           <FormControl isRequired>

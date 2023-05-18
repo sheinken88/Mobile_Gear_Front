@@ -25,25 +25,21 @@ export const ProductDetail = () => {
     console.log("Product: ", product);
   }, [id]);
 
-  if (!product || !product.brand) {
+  if (!product || !product.brand.name) {
     return <div>Loading...</div>;
   }
 
   return (
     <Flex p="20">
       <Box flex="1">
-        <Image
-          src={product.productImage}
-          alt={product.modelName}
-          borderRadius="md"
-        />
+        <Image src={product.product_img} alt={product.name} borderRadius="md" />
       </Box>
       <Box flex="1" ml="5">
         <Text fontSize="sm" color="orange" textTransform="uppercase">
-          {product.brand.brandName}
+          {product.brand.name}
         </Text>
         <Heading color="black" mb="5">
-          {product.modelName}
+          {product.name}
         </Heading>
         <Text color="gray">{product.description}</Text>
         <Flex align="center" mt="5">
