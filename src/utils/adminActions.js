@@ -1,4 +1,5 @@
-// ver si esta fn no debería ir en una carpeta tipo "utils"
+import axios from "axios";
+
 export const addProduct =
   (name, description, price, discount, features, product_img) => async () => {
     try {
