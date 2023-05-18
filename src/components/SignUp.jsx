@@ -28,7 +28,7 @@ export const SignUp = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     await dispatch(registerUser(userName.value, email.value, password.value));
-    navigate("/");
+    navigate("/login");
   };
 
   return (
