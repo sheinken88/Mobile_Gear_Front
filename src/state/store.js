@@ -3,10 +3,16 @@ import userReducer from "./user/userSlice";
 import productsReducer from "./products/productsSlice";
 import cartReducer from "./cart/cartSlice";
 
-export default configureStore({
+const store = configureStore({
   reducer: {
     user: userReducer,
     products: productsReducer,
     cart: cartReducer,
   },
 });
+
+store.subscribe(() => {
+  localStorage.setItem("cart", JSON.stringify(store.getState().cart));
+});
+
+export default store;
