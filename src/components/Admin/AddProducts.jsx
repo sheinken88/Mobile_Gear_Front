@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   FormControl,
@@ -8,11 +8,13 @@ import {
   Stack,
   Button,
   useColorModeValue,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 import useInput from "../../hooks/useInput";
 import { addProduct } from "../../utils/adminActions";
 
-export const ProductManagement = () => {
+export const AddProducts = () => {
   const name = useInput();
   const product_img = useInput();
   const description = useInput();
@@ -20,6 +22,8 @@ export const ProductManagement = () => {
   const price = useInput();
   const discount = useInput();
   const stock = useInput();
+
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleAddProduct = (e) => {
     e.preventDefault();
@@ -35,6 +39,10 @@ export const ProductManagement = () => {
     };
 
     addProduct(productData)();
+
+    setShowAlert(true);
+
+    setTimeout(() => setShowAlert(false), 3000);
   };
 
   return (
@@ -48,6 +56,12 @@ export const ProductManagement = () => {
       mx="auto"
       mt="10"
     >
+      {showAlert && (
+        <Alert status="success">
+          <AlertIcon />
+          Product successfully added!
+        </Alert>
+      )}
       <form onSubmit={handleAddProduct}>
         <Stack spacing={6}>
           <FormControl isRequired>

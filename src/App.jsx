@@ -10,6 +10,8 @@ import { Admin } from "./components/Admin";
 import { Footer } from "./components/Footer";
 import { Login } from "./components/Login";
 import { SignUp } from "./components/SignUp";
+import { AddProducts } from "./components/Admin/AddProducts";
+import { EditProducts } from "./components/Admin/EditProducts";
 import { Box } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -51,7 +53,13 @@ function App() {
               <Route path="/order-history" element={<OrderHistory />} />
             </>
           )}
-          {is_admin && <Route path="/admin" element={<Admin />} />}
+          {is_admin && (
+            <>
+              <Route path="/admin" element={<Admin />} />
+              {/* <Route path="/admin/add-product" element={<AddProducts />} />
+              <Route path="/admin/add-edit" element={<EditProducts />} /> */}
+            </>
+          )}
         </Routes>
         <Footer />
       </Box>
