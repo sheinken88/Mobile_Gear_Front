@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
+import { addItemToCart, updateQuantity } from "../state/cart/cartSlice";
 import { fetchProduct } from "../state/products/productsActions";
 import {
   Box,
@@ -19,11 +20,11 @@ export const ProductDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector((state) => state.products.product);
+  const cartItems = useSelector((state) => state.cart.items);
   const [count, setCount] = useState(0);
 
   useEffect(() => {
     dispatch(fetchProduct(id));
-    console.log("Product: ", product);
   }, [id]);
 
   if (!product || !product.brand) {
@@ -39,7 +40,22 @@ export const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
-    // dispatch al cartSlice
+    const item = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.product_img,
+      quantity: count > 0 ? count : 1,
+    };
+
+    const existingItem = cartItems[item.id];
+
+    if (existingItem) {
+      const newQuantity = existingItem.quantity + item.quantity;
+      dispatch(updateQuantity({ id: item.id, quantity: newQuantity }));
+    } else {
+      dispatch(addItemToCart(item));
+    }
   };
 
   return (

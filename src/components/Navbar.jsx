@@ -30,7 +30,7 @@ import { logoutUser } from "../state/user/userActions";
 export const Navbar = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const userData = useSelector((state) => state.user.userData);
-  const is_admin = useSelector((state) => state.user.is_admin); // falta agregar las opciones de admin en el menu de user
+  const is_admin = useSelector((state) => state.user.is_admin);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -60,25 +60,17 @@ export const Navbar = () => {
         alignItems="center"
         gap="2"
         p="4"
-        // backgroundColor="#E91E63"
         backgroundColor="#EC4E20"
       >
         <Box p="2">
-          <Heading
-            as={Link}
-            to="/"
-            size="xl"
-            color="white"
-            // bgGradient="linear(to-r, white, orange)"
-            // bgClip="text"
-          >
+          <Heading as={Link} to="/" size="xl" color="white">
             Mobile Gear
           </Heading>
         </Box>
         <Flex ml="20" gap="8">
           <Menu>
             <MenuButton fontSize="lg" color="white">
-              Celulares
+              Mobile Phones
             </MenuButton>
             <MenuList>
               <MenuItem as={Link} to="/" _hover={{ color: "#F7DC6F" }}>
@@ -104,14 +96,14 @@ export const Navbar = () => {
           </Menu>
           <Menu>
             <MenuButton fontSize="lg" color="white">
-              Accesorios
+              Accessories
             </MenuButton>
             <MenuList>
               <MenuItem as={Link} to="/">
-                Auriculares
+                Headphones
               </MenuItem>
               <MenuItem as={Link} to="/">
-                Cargadores
+                Chargers
               </MenuItem>
             </MenuList>
           </Menu>
@@ -146,6 +138,8 @@ export const Navbar = () => {
                 onClick={toggleSearchBar}
               />
               <IconButton
+                as={Link}
+                to="/cart"
                 icon={<FaShoppingCart />}
                 size="lg"
                 ml={2}
