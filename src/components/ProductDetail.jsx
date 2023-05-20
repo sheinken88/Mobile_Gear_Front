@@ -21,6 +21,7 @@ export const ProductDetail = () => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.products.product);
   const cartItems = useSelector((state) => state.cart.items);
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -40,6 +41,7 @@ export const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
+    if (!isAuthenticated) alert("Login to add items to your cart");
     const item = {
       id: product.id,
       name: product.name,
