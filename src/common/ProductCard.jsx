@@ -6,14 +6,15 @@ export const ProductCard = ({ product }) => {
     <Box
       as={Link}
       to={`/products/${product.id}`}
-      maxW="sm"
+      maxW="250px"
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
       bg="white"
-      p={6}
+      p={2}
+      position="relative"
     >
-      {product.discount && (
+      {product.discount > 0 && (
         <Badge
           position="absolute"
           top={2}
@@ -26,19 +27,24 @@ export const ProductCard = ({ product }) => {
         </Badge>
       )}
 
-      <Image src={product.product_img} alt={product.name} />
+      <Image
+        src={product.product_img}
+        alt={product.name}
+        objectFit="cover"
+        mx="auto"
+      />
 
       <Flex
         mt={2}
-        justifyContent="space-between"
+        justifyContent="center"
         alignItems="center"
         flexDirection="column"
       >
-        <Text fontSize="xl" fontWeight="semibold" mb={2}>
+        <Text fontSize="lg" fontWeight="semibold" mb={2}>
           {product.name}
         </Text>
 
-        <Text fontWeight="bold" fontSize="2xl">
+        <Text fontWeight="bold" fontSize="xl">
           ${product.price}
         </Text>
       </Flex>
