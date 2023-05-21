@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Box, Center, Heading, Image, Select } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Heading,
+  Image,
+  Select,
+  Menu,
+  MenuList,
+  MenuButton,
+  MenuItem,
+} from "@chakra-ui/react";
 import { ProductGrid } from "./ProductGrid";
 import { Slider } from "./Home/Slider";
 import useInput from "../hooks/useInput";
@@ -30,6 +40,22 @@ export const Home = () => {
     maxPriceInput.value,
     dispatch,
   ]);
+  // // opción si cambiamos las columnas de la base de datos
+  // const handleBrandSelect = (e) => {
+  //   brandInput.setValue(e.target.textContent);
+  // };
+
+  // const handleCategorySelect = (e) => {
+  //   categoryInput.setValue(e.target.textContent);
+  // };
+
+  const handleBrandSelect = (brandName) => {
+    brandInput.setValue(brandName);
+  };
+
+  const handleCategorySelect = (categoryName) => {
+    categoryInput.setValue(categoryName);
+  };
 
   return (
     <Box backgroundColor="gray.100" minHeight="400px">
@@ -44,9 +70,36 @@ export const Home = () => {
       </Center>
       <Slider />
 
-      <Center mt="20">
-        <input type="text" placeholder="Brand" {...brandInput} />
-        <input type="text" placeholder="Category" {...categoryInput} />
+      <Center mt="20" gap="10">
+        <Menu>
+          <MenuButton fontSize="lg" color="black">
+            Brands
+          </MenuButton>
+          <MenuList>
+            <MenuItem onClick={() => handleBrandSelect("samsung")}>
+              Samsung
+            </MenuItem>
+            <MenuItem onClick={() => handleBrandSelect("iphone")}>
+              Iphone
+            </MenuItem>
+          </MenuList>
+        </Menu>
+        <Menu>
+          <MenuButton fontSize="lg" color="black">
+            Categories
+          </MenuButton>
+          <MenuList>
+            <MenuItem onClick={() => handleCategorySelect("smartphone")}>
+              Mobile Phones
+            </MenuItem>
+            <MenuItem onClick={() => handleCategorySelect("tablets")}>
+              Tablets
+            </MenuItem>
+            <MenuItem onClick={() => handleCategorySelect("accesorios")}>
+              Accessories
+            </MenuItem>
+          </MenuList>
+        </Menu>
         <input type="text" placeholder="Min price" {...minPriceInput} />
         <input type="text" placeholder="Max price" {...maxPriceInput} />
       </Center>
