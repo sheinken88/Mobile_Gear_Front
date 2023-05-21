@@ -14,7 +14,7 @@ export const ProductGrid = () => {
   }, [dispatch]);
 
   return (
-    <Center mt="100">
+    <Center mt="5">
       <SimpleGrid maxWidth="900px" columns={[1, 2, 3, 4]} spacing="10" p="5">
         {products.slice(0, 20).map((product) => {
           return <ProductCard key={product.id} product={product} />;

@@ -13,6 +13,7 @@ export const ProductCard = ({ product }) => {
       bg="white"
       p={2}
       position="relative"
+      boxShadow="0 2px 4px rgba(0, 0, 0, 0.2)"
     >
       {product.discount > 0 && (
         <Badge
@@ -40,11 +41,11 @@ export const ProductCard = ({ product }) => {
         alignItems="center"
         flexDirection="column"
       >
-        <Text fontSize="lg" fontWeight="semibold" mb={2}>
+        <Text fontSize="xl" fontWeight="bold" mb={2}>
           {product.name}
         </Text>
 
-        <Text fontWeight="bold" fontSize="xl">
+        <Text fontWeight="normal" fontSize="lg">
           ${product.price}
         </Text>
       </Flex>
