@@ -8,17 +8,37 @@ import {
 } from "./productsSlice";
 import * as settings from "../../settings";
 
+// export const fetchProducts =
+//   (searchTerm = "") =>
+//   async (dispatch) => {
+//     dispatch(setLoading(true));
+//     try {
+//       const response = await axios.get(
+//         `${settings.axiosURL}/products?modelName=${searchTerm}`
+//       );
+//       console.log("Response: ", response);
+//       dispatch(setProducts(response.data));
+//     } catch {
+//       dispatch(setError(error.message));
+//     } finally {
+//       dispatch(setLoading(false));
+//     }
+//   };
+
 export const fetchProducts =
-  (searchTerm = "") =>
+  (searchTerm = "", filters = {}) =>
   async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const response = await axios.get(
-        `${settings.axiosURL}/products?modelName=${searchTerm}`
-      );
+      const response = await axios.get(`${settings.axiosURL}/products`, {
+        params: {
+          ...filters,
+          modelName: searchTerm,
+        },
+      });
       console.log("Response: ", response);
       dispatch(setProducts(response.data));
-    } catch {
+    } catch (error) {
       dispatch(setError(error.message));
     } finally {
       dispatch(setLoading(false));

@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Box, Heading, Text, Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export const CartOrderSummary = () => {
   const items = useSelector((state) => state.cart.items);
@@ -30,7 +31,7 @@ export const CartOrderSummary = () => {
       <Text fontSize="xl" mb="4">
         Total: ${(subtotal + deliveryAmount).toFixed(2)}
       </Text>
-      <Button colorScheme="teal" width="full">
+      <Button colorScheme="teal" width="full" as={Link} top="/payments">
         Checkout
       </Button>
     </Box>
