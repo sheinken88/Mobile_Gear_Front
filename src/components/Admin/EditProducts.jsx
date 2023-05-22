@@ -1,5 +1,10 @@
 import React from "react";
+import { AdminProductsGrid } from "./AdminProductsGrid";
 
 export const EditProducts = () => {
-  return <div>EditProducts</div>;
+  return (
+    <div>
+      <AdminProductsGrid />
+    </div>
+  );
 };
