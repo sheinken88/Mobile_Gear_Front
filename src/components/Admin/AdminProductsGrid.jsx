@@ -1,21 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../state/products/productsActions";
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { AdminProductCard } from "./AdminProductCard";
 import { AdminProductsDetails } from "./AdminProductDetails";
-import { deleteProduct } from "../../utils/adminActions";
+import { deleteProduct } from "../../state/products/productsActions";
+
 export const AdminProductsGrid = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
   const [selectedProduct, setSelectedProduct] = React.useState({});
-  const handleDelete = (product) => {
-    deleteProduct(product.id)();
+  const [refetch, setRefetch] = useState(false);
+
+  const handleDelete = (product, event) => {
+    event.stopPropagation();
+    dispatch(deleteProduct(product.id));
+    setRefetch(!refetch);
   };
 
   useEffect(() => {
     dispatch(fetchProducts());
-  }, [dispatch, products]);
+  }, [dispatch, refetch]);
+
   const handleClick = (product) => {
     setSelectedProduct(product);
   };
@@ -24,24 +30,15 @@ export const AdminProductsGrid = () => {
     <Box p="5">
       {products.map((product) => {
         return (
-          <>
-            <div
-              style={{ cursor: "pointer" }}
-              key={product.id}
-              onClick={() => {
-                handleClick(product);
-              }}
-            >
-              <AdminProductCard product={product} />
-            </div>
-            <button
-              onClick={() => {
-                handleDelete(product);
-              }}
-            >
-              DELETE
-            </button>{" "}
-          </>
+          <div
+            style={{ cursor: "pointer" }}
+            key={product.id}
+            onClick={() => {
+              handleClick(product);
+            }}
+          >
+            <AdminProductCard product={product} handleDelete={handleDelete} />
+          </div>
         );
       })}
     </Box>

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import useInput from "../../hooks/useInput";
 
 import { Box, Button, Input, Textarea } from "@chakra-ui/react";
-import { editProduct } from "../../utils/adminActions";
+import { addProduct, editProduct } from "../../state/products/productsActions";
 import { AdminProductsGrid } from "./AdminProductsGrid";
+import { useDispatch } from "react-redux";
 
 export const AdminProductsDetails = ({
   selectedProduct,
@@ -17,6 +18,8 @@ export const AdminProductsDetails = ({
   const description = useInput(selectedProduct.description);
   const discount = useInput(selectedProduct.discount);
 
+  const dispatch = useDispatch();
+
   const handleSaveChanges = () => {
     const productData = {
       id: selectedProduct.id,
@@ -29,7 +32,7 @@ export const AdminProductsDetails = ({
       stock: Number(stock.value),
     };
 
-    editProduct(productData)();
+    dispatch(editProduct(productData));
     setSelectedProduct({ id: null });
   };
 
