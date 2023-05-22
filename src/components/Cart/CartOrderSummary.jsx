@@ -1,17 +1,37 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Box, Heading, Text, Button } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { checkout } from "../../state/checkout/checkoutActions";
 
 export const CartOrderSummary = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.items);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
-  const deliveryAmount = 5; // por ahora lo mantengo estatico
+  const checkoutLoading = useSelector((state) => state.checkout.loading);
+  const checkoutError = useSelector((state) => state.checkout.error);
+  const checkoutState = useSelector((state) => state.checkout);
+  const deliveryAmount = 1000;
 
   const subtotal = Object.values(items).reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
+
+  const handleCheckout = () => {
+    dispatch(checkout(Object.values(items)));
+    navigate("/payments");
+  };
+
+  useEffect(() => {
+    if (checkoutState.completed && !checkoutState.loading) {
+      navigate("/payments");
+    } else if (checkoutState.error) {
+      console.log(checkoutError.error);
+      alert("error en el checkout");
+    }
+  }, [checkoutState]);
 
   return (
     <Box
@@ -31,7 +51,13 @@ export const CartOrderSummary = () => {
       <Text fontSize="xl" mb="4">
         Total: ${(subtotal + deliveryAmount).toFixed(2)}
       </Text>
-      <Button colorScheme="teal" width="full" as={Link} top="/payments">
+      <Button
+        colorScheme="teal"
+        width="full"
+        onClick={handleCheckout}
+        isLoading={checkoutLoading}
+        isDisabled={checkoutLoading}
+      >
         Checkout
       </Button>
     </Box>
