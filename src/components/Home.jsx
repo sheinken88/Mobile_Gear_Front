@@ -50,17 +50,25 @@ export const Home = () => {
   // };
 
   const handleBrandSelect = (brandName) => {
-    brandInput.setValue(brandName);
+    if (brandName === "All") {
+      brandInput.setValue("");
+    } else {
+      brandInput.setValue(brandName);
+    }
   };
 
   const handleCategorySelect = (categoryName) => {
-    categoryInput.setValue(categoryName);
+    if (categoryName === "All") {
+      categoryInput.setValue("");
+    } else {
+      categoryInput.setValue(categoryName);
+    }
   };
 
   return (
     <Box backgroundColor="gray.100" minHeight="400px">
       <Image
-        src="https://cdn.discordapp.com/attachments/1109602975460110380/1109611584818528256/43f5ae4e-9248-4b05-b56f-dd68497aac25.jpg"
+        src="https://http2.mlstatic.com/D_NQ_940356-MLA69502413146_052023-OO.webp"
         alt="banner"
         width="100%"
         height="400"
@@ -76,6 +84,7 @@ export const Home = () => {
             Brands
           </MenuButton>
           <MenuList>
+            <MenuItem onClick={() => handleBrandSelect("All")}>All</MenuItem>
             <MenuItem onClick={() => handleBrandSelect("samsung")}>
               Samsung
             </MenuItem>
@@ -89,6 +98,7 @@ export const Home = () => {
             Categories
           </MenuButton>
           <MenuList>
+            <MenuItem onClick={() => handleCategorySelect("All")}>All</MenuItem>
             <MenuItem onClick={() => handleCategorySelect("smartphone")}>
               Mobile Phones
             </MenuItem>
