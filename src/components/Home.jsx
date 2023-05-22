@@ -88,7 +88,7 @@ export const Home = () => {
             <MenuItem onClick={() => handleBrandSelect("samsung")}>
               Samsung
             </MenuItem>
-            <MenuItem onClick={() => handleBrandSelect("iphone")}>
+            <MenuItem onClick={() => handleBrandSelect("apple")}>
               Iphone
             </MenuItem>
           </MenuList>
