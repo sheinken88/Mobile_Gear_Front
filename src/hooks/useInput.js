@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export default function useInput() {
-  const [value, setValue] = useState("");
+export default function useInput(val) {
+  const [value, setValue] = useState(val || "");
 
   const onChange = (event) => {
     setValue(event.target.value);
