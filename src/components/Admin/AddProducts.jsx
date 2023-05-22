@@ -12,7 +12,8 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 import useInput from "../../hooks/useInput";
-import { addProduct } from "../../utils/adminActions";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../state/products/productsActions";
 
 export const AddProducts = () => {
   const name = useInput();
@@ -22,6 +23,8 @@ export const AddProducts = () => {
   const price = useInput();
   const discount = useInput();
   const stock = useInput();
+
+  const dispatch = useDispatch();
 
   const [showAlert, setShowAlert] = useState(false);
 
@@ -38,7 +41,7 @@ export const AddProducts = () => {
       stock: Number(stock.value),
     };
 
-    addProduct(productData)();
+    dispatch(addProduct(productData));
 
     setShowAlert(true);
 
