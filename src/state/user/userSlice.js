@@ -4,6 +4,7 @@ const initialState = {
   isAuthenticated: false,
   userData: null,
   is_admin: false,
+  users: [],
 };
 
 const userSlice = createSlice({
@@ -25,8 +26,11 @@ const userSlice = createSlice({
       state.userData = null;
       state.is_admin = false;
     },
+    list: (state, action) => {
+      state.users = action.payload;
+    },
   },
 });
 
-export const { login, logout, register } = userSlice.actions;
+export const { login, logout, register, list } = userSlice.actions;
 export default userSlice.reducer;

@@ -1,6 +1,6 @@
 import axios from "axios";
 axios.defaults.withCredentials = true;
-import { login, logout, register } from "./userSlice";
+import { login, logout, register, list } from "./userSlice";
 import * as settings from "../../settings";
 
 export const registerUser = (username, email, password) => async (dispatch) => {
@@ -38,9 +38,17 @@ export const loginUser = (email, password) => async (dispatch) => {
 export const logoutUser = () => async (dispatch) => {
   try {
     await axios.post(`${settings.axiosURL}/users/logout`);
-
     dispatch(logout());
   } catch (error) {
     console.error("Login error:", error);
+  }
+};
+
+export const fetchUsers = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`${settings.axiosURL}/admin/users`);
+    dispatch(list(response.data));
+  } catch (error) {
+    console.error("Fetch error:", error);
   }
 };
