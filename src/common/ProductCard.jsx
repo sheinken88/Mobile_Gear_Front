@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 import {
   Box,
   Image,
@@ -8,6 +10,8 @@ import {
   IconButton,
   useColorModeValue as mode,
   Tooltip,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -18,6 +22,8 @@ export const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const cartItems = useSelector((state) => state.cart.items);
+
+  const [showAlert, setShowAlert] = useState(false);
 
   const originalPrice = Math.round(
     product.price * (product.discount / 100 + 1)
@@ -41,6 +47,10 @@ export const ProductCard = ({ product }) => {
       alert("Item is already in the cart");
     } else {
       dispatch(addItemToCart(item));
+
+      setShowAlert(true);
+
+      setTimeout(() => setShowAlert(false), 3000);
     }
   };
 
@@ -58,6 +68,12 @@ export const ProductCard = ({ product }) => {
       boxShadow="md"
       _hover={{ boxShadow: "xl" }}
     >
+      {showAlert && (
+        <Alert status="success">
+          <AlertIcon />
+          Product successfully added!
+        </Alert>
+      )}
       {product.discount > 0 && (
         <Badge
           position="absolute"
