@@ -46,7 +46,9 @@ export const ProductDetail = () => {
   };
 
   const decrement = () => {
-    setCount(count - 1);
+    if (count > 0) {
+      setCount(count - 1);
+    }
   };
 
   const handleAddToCart = () => {
@@ -62,10 +64,31 @@ export const ProductDetail = () => {
     const existingItem = cartItems[item.id];
 
     if (existingItem) {
-      const newQuantity = existingItem.quantity + item.quantity;
-      dispatch(updateQuantity({ id: item.id, quantity: newQuantity }));
+      alert("Item is already in the cart");
     } else {
       dispatch(addItemToCart(item));
+    }
+  };
+
+  const renderCartButton = () => {
+    const existingItem = cartItems[product.id];
+
+    if (existingItem) {
+      return (
+        <Button backgroundColor="#3498DB" color="white" as={Link} to="/cart">
+          Go to cart
+        </Button>
+      );
+    } else {
+      return (
+        <Button
+          onClick={handleAddToCart}
+          backgroundColor="#3498DB"
+          color="white"
+        >
+          Add to cart
+        </Button>
+      );
     }
   };
 
@@ -129,13 +152,7 @@ export const ProductDetail = () => {
                 icon={<AddIcon />}
               />
             </Flex>
-            <Button
-              onClick={handleAddToCart}
-              backgroundColor="#3498DB"
-              color="white"
-            >
-              Add to cart
-            </Button>
+            {renderCartButton()}
           </Flex>
           <HStack mt="6" fontWeight="semibold">
             <p>or</p>

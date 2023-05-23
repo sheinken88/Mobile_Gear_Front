@@ -26,6 +26,7 @@ export const ProductCard = ({ product }) => {
   const handleAddToCart = (event) => {
     event.preventDefault();
     if (!isAuthenticated) alert("Login to add items to your cart");
+
     const item = {
       id: product.id,
       name: product.name,
@@ -37,8 +38,7 @@ export const ProductCard = ({ product }) => {
     const existingItem = cartItems[item.id];
 
     if (existingItem) {
-      const newQuantity = existingItem.quantity + item.quantity;
-      dispatch(updateQuantity({ id: item.id, quantity: newQuantity }));
+      alert("Item is already in the cart");
     } else {
       dispatch(addItemToCart(item));
     }
