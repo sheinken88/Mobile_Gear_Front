@@ -40,14 +40,6 @@ export const Home = () => {
     maxPriceInput.value,
     dispatch,
   ]);
-  // // opción si cambiamos las columnas de la base de datos
-  // const handleBrandSelect = (e) => {
-  //   brandInput.setValue(e.target.textContent);
-  // };
-
-  // const handleCategorySelect = (e) => {
-  //   categoryInput.setValue(e.target.textContent);
-  // };
 
   const handleBrandSelect = (brandName) => {
     if (brandName === "All") {

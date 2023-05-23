@@ -29,6 +29,10 @@ export const ProductDetail = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const [count, setCount] = useState(0);
 
+  const originalPrice = Math.round(
+    product.price * (product.discount / 100 + 1)
+  );
+
   useEffect(() => {
     dispatch(fetchProduct(id));
   }, [id]);
@@ -100,7 +104,7 @@ export const ProductDetail = () => {
             </Badge>
           </Flex>
           <Text color="gray" as="s">
-            ${Math.round(product.price * (product.discount / 100 + 1))}
+            ${originalPrice}
           </Text>
           <Divider mt="5" mb="5" />
           <Flex align="center" justify="space-between">
