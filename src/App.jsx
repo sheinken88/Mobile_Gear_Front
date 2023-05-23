@@ -7,6 +7,7 @@ import { Cart } from "./components/Cart";
 import { Checkout } from "./components/Checkout";
 import { OrderHistory } from "./components/OrderHistory";
 import { Admin } from "./components/Admin";
+import { History } from "./components/History";
 import { Footer } from "./components/Footer";
 import { Login } from "./components/Login";
 import { SignUp } from "./components/SignUp";
@@ -44,6 +45,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/history" element={<History />} />
           <Route path="/products" element={<Home />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           {isAuthenticated && (

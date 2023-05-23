@@ -161,6 +161,9 @@ export const Navbar = () => {
               <MenuItem as={Link} to="/">
                 Account
               </MenuItem>
+              <MenuItem as={Link} to="/history">
+                History
+              </MenuItem>
               {is_admin ? (
                 <MenuItem as={Link} to="/admin">
                   My dashboard
