@@ -9,7 +9,6 @@ export const SalesDashboard = () => {
 
   useEffect(() => {
     dispatch(fetchOrders());
-    console.log(123, orders);
   }, [dispatch]);
 
   return (
@@ -18,9 +17,10 @@ export const SalesDashboard = () => {
         <Thead>
           <Tr>
             <Th>ID</Th>
-            <Th>Producto</Th>
-            <Th>Cantidad</Th>
-            <Th>Comprador</Th>
+            <Th>Product</Th>
+            <Th>Quantity</Th>
+            <Th>Buyer</Th>
+            <Th>Paid</Th>
           </Tr>
         </Thead>
 
@@ -32,6 +32,7 @@ export const SalesDashboard = () => {
                 <Td>{order.product.name}</Td>
                 <Td>{order.qty}</Td>
                 <Td>{order.user.email}</Td>
+                <Td>${order.product.price * order.qty}</Td>
               </Tr>
             );
           })}

@@ -4,6 +4,7 @@ import { AddIcon, EditIcon, ViewIcon } from "@chakra-ui/icons";
 import { AddProducts } from "./Admin/AddProducts";
 import { EditProducts } from "./Admin/EditProducts";
 import { SalesDashboard } from "./Admin/SalesDashboard";
+import { UsersDashboard } from "./Admin/UsersDashboard";
 
 export const Admin = () => {
   const [selectedPanel, setSelectedPanel] = useState(null);
@@ -37,12 +38,19 @@ export const Admin = () => {
           >
             View sales
           </Button>
+          <Button
+            leftIcon={<ViewIcon />}
+            onClick={() => setSelectedPanel("view-users")}
+          >
+            Users
+          </Button>
         </VStack>
       </Box>
       <Box pl={16} flex="1">
         {selectedPanel === "add-product" && <AddProducts />}
         {selectedPanel === "edit-product" && <EditProducts />}
         {selectedPanel === "view-sales" && <SalesDashboard />}
+        {selectedPanel === "view-users" && <UsersDashboard />}
       </Box>
     </Flex>
   );
