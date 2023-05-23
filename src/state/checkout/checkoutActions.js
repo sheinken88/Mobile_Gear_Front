@@ -12,6 +12,7 @@ export const checkout = (cartItems) => async (dispatch) => {
     await axios.post(`${settings.axiosURL}/orders/checkout`, {
       data: cartItems,
     });
+    await axios.post(`${settings.axiosURL}/orders/confirm`);
     dispatch(checkoutSuccess());
   } catch (error) {
     dispatch(checkoutFailure(error.message));
