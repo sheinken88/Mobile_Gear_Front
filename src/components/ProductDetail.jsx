@@ -16,6 +16,8 @@ import {
   HStack,
   VStack,
   useColorModeValue as mode,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
@@ -27,7 +29,9 @@ export const ProductDetail = () => {
   const product = useSelector((state) => state.products.product);
   const cartItems = useSelector((state) => state.cart.items);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+
   const [count, setCount] = useState(0);
+  const [showAlert, setShowAlert] = useState(false);
 
   const originalPrice = Math.round(
     product.price * (product.discount / 100 + 1)
@@ -71,6 +75,10 @@ export const ProductDetail = () => {
       alert("Item is already in the cart");
     } else {
       dispatch(addItemToCart(item));
+
+      setShowAlert(true);
+
+      setTimeout(() => setShowAlert(false), 3000);
     }
   };
 
@@ -79,7 +87,7 @@ export const ProductDetail = () => {
 
     if (existingItem) {
       return (
-        <Button backgroundColor="#3498DB" color="white" as={Link} to="/cart">
+        <Button backgroundColor="orange" color="white" as={Link} to="/cart">
           Go to cart
         </Button>
       );
@@ -117,6 +125,12 @@ export const ProductDetail = () => {
           />
         </Box>
         <Box flex="1" ml="5">
+          {showAlert && (
+            <Alert status="success">
+              <AlertIcon />
+              Product successfully added!
+            </Alert>
+          )}
           <Text fontSize="sm" color="orange" textTransform="uppercase">
             {product.brand.name}
           </Text>
