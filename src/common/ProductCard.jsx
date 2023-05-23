@@ -1,19 +1,24 @@
-import { Box, Image, Badge, Flex, Text } from "@chakra-ui/react";
+import { Box, Image, Badge, Flex, Text, VStack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 export const ProductCard = ({ product }) => {
+  const originalPrice = Math.round(
+    product.price * (product.discount / 100 + 1)
+  );
+
   return (
     <Box
       as={Link}
       to={`/products/${product.id}`}
-      maxW="250px"
+      maxW="sm"
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
       bg="white"
-      p={2}
+      p={5}
       position="relative"
-      boxShadow="0 2px 4px rgba(0, 0, 0, 0.2)"
+      boxShadow="md"
+      _hover={{ boxShadow: "xl" }}
     >
       {product.discount > 0 && (
         <Badge
@@ -33,22 +38,32 @@ export const ProductCard = ({ product }) => {
         alt={product.name}
         objectFit="cover"
         mx="auto"
+        boxSize="200px"
       />
 
-      <Flex
-        mt={2}
-        justifyContent="center"
-        alignItems="center"
-        flexDirection="column"
-      >
-        <Text fontSize="xl" fontWeight="bold" mb={2}>
+      <VStack mt={4} alignItems="stretch" spacing={3}>
+        <Text fontSize="md" fontWeight="semibold" isTruncated>
           {product.name}
         </Text>
 
-        <Text fontWeight="normal" fontSize="lg">
-          ${product.price}
-        </Text>
-      </Flex>
+        {product.discount > 0 ? (
+          <Flex
+            justifyContent="space-between"
+            alignItems="center"
+            fontSize="lg"
+            fontWeight="bold"
+          >
+            <Text color="gray" as="s">
+              ${originalPrice}
+            </Text>
+            <Text color="black">${product.price}</Text>
+          </Flex>
+        ) : (
+          <Text fontSize="lg" fontWeight="bold" color="black">
+            ${product.price}
+          </Text>
+        )}
+      </VStack>
     </Box>
   );
 };
