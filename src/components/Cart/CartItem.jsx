@@ -1,11 +1,15 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Box, Flex, Image, Text, IconButton } from "@chakra-ui/react";
 import { AddIcon, MinusIcon, DeleteIcon } from "@chakra-ui/icons";
 import { updateQuantity, removeItemFromCart } from "../../state/cart/cartSlice";
 
 export const CartItem = ({ id, name, image, price, quantity }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const items = useSelector((state) => state.cart.items);
 
   const increment = () => {
     dispatch(updateQuantity({ id, quantity: quantity + 1 }));
@@ -19,6 +23,10 @@ export const CartItem = ({ id, name, image, price, quantity }) => {
 
   const handleRemove = () => {
     dispatch(removeItemFromCart(id));
+
+    if (Object.keys(items).length === 1) {
+      navigate("/");
+    }
   };
 
   return (
