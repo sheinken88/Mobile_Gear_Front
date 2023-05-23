@@ -53,6 +53,10 @@ export const ProductDetail = () => {
 
   const handleAddToCart = () => {
     if (!isAuthenticated) alert("Login to add items to your cart");
+    if (count <= 0) {
+      alert("Please select a quantity");
+      return;
+    }
     const item = {
       id: product.id,
       name: product.name,
