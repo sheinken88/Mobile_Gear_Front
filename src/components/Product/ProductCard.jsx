@@ -16,7 +16,7 @@ import {
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addItemToCart, updateQuantity } from "../state/cart/cartSlice";
+import { addItemToCart, updateQuantity } from "../../state/cart/cartSlice";
 
 export const ProductCard = ({ product }) => {
   const dispatch = useDispatch();

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { CartItem } from "./Cart/CartItem";
-import { CartOrderSummary } from "./Cart/CartOrderSummary";
+import { CartItem } from "./CartItem";
+import { CartOrderSummary } from "./CartOrderSummary";
 
 import {
   Box,

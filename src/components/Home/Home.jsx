@@ -10,11 +10,11 @@ import {
   MenuButton,
   MenuItem,
 } from "@chakra-ui/react";
-import { ProductGrid } from "./ProductGrid";
-import { Slider } from "./Home/Slider";
-import useInput from "../hooks/useInput";
+import { ProductGrid } from "../Product/ProductGrid";
+import { Slider } from "./Slider";
+import useInput from "../../hooks/useInput";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts } from "../state/products/productsActions";
+import { fetchProducts } from "../../state/products/productsActions";
 
 export const Home = () => {
   const dispatch = useDispatch();
