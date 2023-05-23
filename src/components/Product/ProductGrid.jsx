@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts } from "../state/products/productsActions";
+import { fetchProducts } from "../../state/products/productsActions";
 import { SimpleGrid, Center } from "@chakra-ui/react";
-import { ProductCard } from "../common/ProductCard";
+import { ProductCard } from "./ProductCard";
 import { useParams } from "react-router-dom";
 
 export const ProductGrid = () => {

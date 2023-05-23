@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { ProductCard } from "../../common/ProductCard";
+import { ProductCard } from "../Product/ProductCard";
 import { fetchDiscountedProducts } from "../../state/products/productsActions";
 
 export const Slider = () => {

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Box, Button, VStack, Heading, Flex, Image } from "@chakra-ui/react";
 import { AddIcon, EditIcon, ViewIcon } from "@chakra-ui/icons";
-import { AddProducts } from "./Admin/AddProducts";
-import { EditProducts } from "./Admin/EditProducts";
-import { SalesDashboard } from "./Admin/SalesDashboard";
-import { UsersDashboard } from "./Admin/UsersDashboard";
+import { AddProducts } from "./AddProducts";
+import { EditProducts } from "./EditProducts";
+import { SalesDashboard } from "./SalesDashboard";
+import { UsersDashboard } from "./UsersDashboard";
 
 export const Admin = () => {
   const [selectedPanel, setSelectedPanel] = useState(null);

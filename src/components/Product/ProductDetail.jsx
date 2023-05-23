@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { addItemToCart, updateQuantity } from "../state/cart/cartSlice";
-import { fetchProduct } from "../state/products/productsActions";
+import { addItemToCart, updateQuantity } from "../../state/cart/cartSlice";
+import { fetchProduct } from "../../state/products/productsActions";
 import {
   Box,
   Heading,
