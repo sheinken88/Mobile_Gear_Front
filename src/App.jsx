@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import { Navbar } from "./components/Navbar";
 import { Home } from "./components/Home";
 import { ProductDetail } from "./components/ProductDetail";
@@ -38,34 +39,40 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Box width="100%">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/history" element={<History />} />
-          <Route path="/products" element={<Home />} />
-          <Route path="/products/:id" element={<ProductDetail />} />
-          {isAuthenticated && (
-            <>
-              <Route path="/cart" element={<Cart />} />
-              <Route path="checkout" element={<Checkout />} />
-              <Route path="/order-history" element={<OrderHistory />} />
-            </>
-          )}
-          {is_admin && (
-            <>
-              <Route path="/admin" element={<Admin />} />
-              {/* <Route path="/admin/add-product" element={<AddProducts />} />
+    <>
+      {" "}
+      <Helmet>
+        <title>Mobilegear</title>
+      </Helmet>
+      <BrowserRouter>
+        <Box width="100%">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/history" element={<History />} />
+            <Route path="/products" element={<Home />} />
+            <Route path="/products/:id" element={<ProductDetail />} />
+            {isAuthenticated && (
+              <>
+                <Route path="/cart" element={<Cart />} />
+                <Route path="checkout" element={<Checkout />} />
+                <Route path="/order-history" element={<OrderHistory />} />
+              </>
+            )}
+            {is_admin && (
+              <>
+                <Route path="/admin" element={<Admin />} />
+                {/* <Route path="/admin/add-product" element={<AddProducts />} />
               <Route path="/admin/add-edit" element={<EditProducts />} /> */}
-            </>
-          )}
-        </Routes>
-        <Footer />
-      </Box>
-    </BrowserRouter>
+              </>
+            )}
+          </Routes>
+          <Footer />
+        </Box>
+      </BrowserRouter>
+    </>
   );
 }
 
