@@ -5,6 +5,7 @@ import { AddProducts } from "./AddProducts";
 import { EditProducts } from "./EditProducts";
 import { SalesDashboard } from "./SalesDashboard";
 import { UsersDashboard } from "./UsersDashboard";
+import { EditCategories } from "./EditCategories";
 
 export const Admin = () => {
   const [selectedPanel, setSelectedPanel] = useState(null);
@@ -39,6 +40,12 @@ export const Admin = () => {
             View sales
           </Button>
           <Button
+            leftIcon={<EditIcon />}
+            onClick={() => setSelectedPanel("edit-categories")}
+          >
+            Edit categories
+          </Button>
+          <Button
             leftIcon={<ViewIcon />}
             onClick={() => setSelectedPanel("view-users")}
           >
@@ -47,10 +54,13 @@ export const Admin = () => {
         </VStack>
       </Box>
       <Box pl={16} flex="1">
-        {selectedPanel === "add-product" && <AddProducts />}
+        {selectedPanel === "add-product" && (
+          <AddProducts setSelectedPanel={setSelectedPanel} />
+        )}
         {selectedPanel === "edit-product" && <EditProducts />}
         {selectedPanel === "view-sales" && <SalesDashboard />}
         {selectedPanel === "view-users" && <UsersDashboard />}
+        {selectedPanel === "edit-categories" && <EditCategories />}
       </Box>
     </Flex>
   );
