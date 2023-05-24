@@ -10,7 +10,7 @@ import {
 import * as settings from "../../settings";
 
 export const fetchProducts =
-  (searchTerm = "", filters = {}) =>
+  (searchTerm = "", filters = {}, categoryName = "") =>
   async (dispatch) => {
     dispatch(setLoading(true));
     try {
@@ -18,6 +18,7 @@ export const fetchProducts =
         params: {
           ...filters,
           modelName: searchTerm,
+          categoryName: categoryName,
         },
       });
       console.log("Response: ", response);

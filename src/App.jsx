@@ -20,7 +20,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import * as settings from "../src/settings";
 import { login } from "./state/user/userSlice";
-
+import { fetchProducts } from "./state/products/productsActions";
 import { useDispatch } from "react-redux";
 
 function App() {
@@ -37,6 +37,10 @@ function App() {
     }
     fetchUser();
   }, []);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   return (
     <>
@@ -64,8 +68,6 @@ function App() {
             {is_admin && (
               <>
                 <Route path="/admin" element={<Admin />} />
-                {/* <Route path="/admin/add-product" element={<AddProducts />} />
-              <Route path="/admin/add-edit" element={<EditProducts />} /> */}
               </>
             )}
           </Routes>

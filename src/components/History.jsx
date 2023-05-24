@@ -5,6 +5,7 @@ import { Link, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 
 export const History = () => {
   const [history, setHistory] = useState([]);
+
   useEffect(() => {
     const getHistory = async () => {
       const response = await axios.get(`${settings.axiosURL}/orders/history`);

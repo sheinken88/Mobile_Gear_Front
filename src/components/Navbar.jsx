@@ -27,6 +27,8 @@ import { useNavigate } from "react-router-dom";
 
 import { logoutUser } from "../state/user/userActions";
 
+import { fetchProduct } from "../state/products/productsActions";
+
 export const Navbar = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const userData = useSelector((state) => state.user.userData);
@@ -45,7 +47,11 @@ export const Navbar = () => {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     dispatch(fetchProducts(searchInput.value));
-    searchInput.reset(); //revisar
+    searchInput.reset();
+  };
+
+  const handleCategorySelect = (category) => {
+    dispatch(fetchProducts("", {}, category));
   };
 
   const handleLogout = () => {
@@ -63,49 +69,43 @@ export const Navbar = () => {
         backgroundColor="#EC4E20"
       >
         <Box p="2">
-          <Heading as={Link} to="/" size="xl" color="white">
+          <Heading
+            as={Link}
+            to="/"
+            size="xl"
+            color="white"
+            onClick={() => handleCategorySelect("")}
+          >
             Mobile Gear
           </Heading>
         </Box>
         <Flex ml="20" gap="8">
           <Menu>
-            <MenuButton fontSize="lg" color="white">
+            <MenuButton
+              fontSize="lg"
+              color="white"
+              onClick={() => handleCategorySelect("smartphone")}
+            >
               Mobile Phones
             </MenuButton>
-            <MenuList>
-              <MenuItem as={Link} to="/" _hover={{ color: "#F7DC6F" }}>
-                Samsung
-              </MenuItem>
-              <MenuItem as={Link} to="/">
-                Iphone
-              </MenuItem>
-            </MenuList>
           </Menu>
           <Menu>
-            <MenuButton fontSize="lg" color="white">
+            <MenuButton
+              fontSize="lg"
+              color="white"
+              onClick={() => handleCategorySelect("tablets")}
+            >
               Tablets
             </MenuButton>
-            <MenuList>
-              <MenuItem as={Link} to="/">
-                Samsung
-              </MenuItem>
-              <MenuItem as={Link} to="/">
-                iPad
-              </MenuItem>
-            </MenuList>
           </Menu>
           <Menu>
-            <MenuButton fontSize="lg" color="white">
+            <MenuButton
+              fontSize="lg"
+              color="white"
+              onClick={() => handleCategorySelect("accesorios")}
+            >
               Accessories
             </MenuButton>
-            <MenuList>
-              <MenuItem as={Link} to="/">
-                Headphones
-              </MenuItem>
-              <MenuItem as={Link} to="/">
-                Chargers
-              </MenuItem>
-            </MenuList>
           </Menu>
         </Flex>
         <Spacer />

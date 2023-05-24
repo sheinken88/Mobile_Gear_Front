@@ -5,6 +5,8 @@ import cartReducer from "./cart/cartSlice";
 import checkoutReducer from "./checkout/checkoutSlice";
 import ordersReducer from "./orders/ordersSlice";
 import categoriesReducer from "./categories/categoriesSlice";
+import filterReducer from "./filters/filterSlice";
+
 
 const store = configureStore({
   reducer: {
@@ -14,6 +16,7 @@ const store = configureStore({
     checkout: checkoutReducer,
     orders: ordersReducer,
     categories: categoriesReducer,
+    filter: filterReducer,
   },
 });
 
