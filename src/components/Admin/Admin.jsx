@@ -12,7 +12,13 @@ export const Admin = () => {
 
   return (
     <Flex>
-      <Box width="200px" p={4} backgroundColor="#3498DB" borderRightWidth="1px">
+      <Box
+        width="200px"
+        p={4}
+        backgroundColor="#3498DB"
+        borderRightWidth="1px"
+        minH="100vh"
+      >
         <VStack spacing={4} align="stretch">
           <Image
             boxSize="150px"

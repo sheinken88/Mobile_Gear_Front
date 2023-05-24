@@ -15,6 +15,7 @@ import { Slider } from "./Slider";
 import useInput from "../../hooks/useInput";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../state/products/productsActions";
+import { Footer } from "../Footer";
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ export const Home = () => {
   };
 
   return (
-    <Box backgroundColor="gray.100" minHeight="400px">
+    <Box backgroundColor="gray.100" minHeight="100vh">
       <Image
         src="src/assets/Captura.JPG"
         alt="banner"
@@ -107,6 +108,7 @@ export const Home = () => {
       </Center>
 
       <ProductGrid />
+      <Footer />
     </Box>
   );
 };
