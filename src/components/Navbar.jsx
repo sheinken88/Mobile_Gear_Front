@@ -33,6 +33,11 @@ export const Navbar = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const userData = useSelector((state) => state.user.userData);
   const is_admin = useSelector((state) => state.user.is_admin);
+  const categoryInput = useInput();
+
+  const filters = {
+    categoryName: categoryInput.value,
+  };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -50,8 +55,10 @@ export const Navbar = () => {
     searchInput.reset();
   };
 
-  const handleCategorySelect = (category) => {
-    dispatch(fetchProducts("", {}, category));
+  const handleCategorySelect = (categoryName) => {
+    categoryInput.setValue(categoryName);
+    filters.categoryName = categoryName;
+    dispatch(fetchProducts("", filters));
   };
 
   const handleLogout = () => {
