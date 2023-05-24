@@ -105,10 +105,8 @@ export const ProductDetail = () => {
   };
 
   return (
-    <Center backgroundColor=" #EDF2F7">
+    <Center backgroundColor=" #EDF2F7" minHeight="100vh">
       <Flex
-        mt="20"
-        mb="20"
         p="20"
         width="50%"
         borderWidth="1px"

@@ -20,7 +20,7 @@ import { useSelector } from "react-redux";
 export const Cart = () => {
   const items = useSelector((state) => state.cart.items);
   return (
-    <Center backgroundColor="#EDF2F7">
+    <Center backgroundColor="#EDF2F7" minHeight="100vh">
       <Box
         backgroundColor="#ffff"
         mt="20"

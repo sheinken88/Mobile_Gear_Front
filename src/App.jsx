@@ -9,7 +9,6 @@ import { Checkout } from "./components/Checkout";
 import { OrderHistory } from "./components/OrderHistory";
 import { Admin } from "./components/Admin/Admin";
 import { History } from "./components/History";
-import { Footer } from "./components/Footer";
 import { Login } from "./components/Login";
 import { SignUp } from "./components/SignUp";
 import { AddProducts } from "./components/Admin/AddProducts";
@@ -71,7 +70,6 @@ function App() {
               </>
             )}
           </Routes>
-          <Footer />
         </Box>
       </BrowserRouter>
     </>
