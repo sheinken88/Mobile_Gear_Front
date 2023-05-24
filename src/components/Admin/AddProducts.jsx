@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
+  Select,
   FormControl,
   FormLabel,
   Input,
@@ -12,10 +13,11 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 import useInput from "../../hooks/useInput";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchCategories } from "../../state/categories/categoriesActions";
 import { addProduct } from "../../state/products/productsActions";
 
-export const AddProducts = () => {
+export const AddProducts = ({ setSelectedPanel }) => {
   const name = useInput();
   const product_img = useInput();
   const description = useInput();
@@ -23,8 +25,16 @@ export const AddProducts = () => {
   const price = useInput();
   const discount = useInput();
   const stock = useInput();
+  const category = useInput();
 
   const dispatch = useDispatch();
+
+  const categories = useSelector((state) => state.categories.categories);
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+    console.log(categories);
+  }, [dispatch]);
 
   const [showAlert, setShowAlert] = useState(false);
 
@@ -39,6 +49,7 @@ export const AddProducts = () => {
       price: parseFloat(price.value),
       discount: parseInt(discount.value),
       stock: Number(stock.value),
+      categoryId: Number(category.value),
     };
 
     dispatch(addProduct(productData));
@@ -46,6 +57,7 @@ export const AddProducts = () => {
     setShowAlert(true);
 
     setTimeout(() => setShowAlert(false), 3000);
+    setSelectedPanel("edit-product");
   };
 
   return (
@@ -115,6 +127,19 @@ export const AddProducts = () => {
           <FormControl>
             <FormLabel>Stock</FormLabel>
             <Input id="stock" type="number" {...stock} placeholder="Stock" />
+          </FormControl>
+
+          <FormControl>
+            <FormLabel>Category</FormLabel>
+            <Select id="category" type="number" {...category}>
+              {categories.map((item) => {
+                return (
+                  <option value={category.id} id={category.id}>
+                    {item.name}
+                  </option>
+                );
+              })}
+            </Select>
           </FormControl>
 
           <Button

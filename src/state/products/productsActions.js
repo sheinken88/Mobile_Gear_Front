@@ -59,23 +59,13 @@ export const fetchDiscountedProducts = () => async (dispatch) => {
   }
 };
 
-export const addProduct =
-  (name, description, price, discount, features, product_img, stock) =>
-  async () => {
-    try {
-      await axios.post(`${settings.axiosURL}/admin/products`, {
-        name,
-        description,
-        price,
-        discount,
-        features,
-        product_img,
-        stock,
-      });
-    } catch (error) {
-      console.error("Login error:", error);
-    }
-  };
+export const addProduct = (productData) => async () => {
+  try {
+    await axios.post(`${settings.axiosURL}/admin/products`, productData);
+  } catch (error) {
+    console.error("Login error:", error);
+  }
+};
 
 export const editProduct = (product) => async () => {
   try {
