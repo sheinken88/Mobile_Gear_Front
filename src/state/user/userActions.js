@@ -26,7 +26,6 @@ export const loginUser = (email, password) => async (dispatch) => {
     });
 
     const payload = await axios.get(`${settings.axiosURL}/users/secret`);
-    console.log("PAYLOAD: ", payload.data);
 
     const userData = payload.data;
     await dispatch(login(userData));

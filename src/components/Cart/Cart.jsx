@@ -57,7 +57,6 @@ export const Cart = () => {
 
             <Stack spacing="6">
               {Object.values(items).map((item) => {
-                console.log(item);
                 return <CartItem key={item.id} {...item} />;
               })}
             </Stack>

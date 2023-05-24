@@ -42,7 +42,6 @@ export const editCategory = (category) => async () => {
 
 export const deleteCategory = (categoryId) => async (dispatch) => {
   try {
-    console.log(categoryId);
     await axios.delete(`${settings.axiosURL}/categories/${categoryId}`);
     dispatch(deleteCategoryAction(categoryId));
   } catch (error) {

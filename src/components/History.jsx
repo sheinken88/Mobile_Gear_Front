@@ -9,7 +9,6 @@ export const History = () => {
   useEffect(() => {
     const getHistory = async () => {
       const response = await axios.get(`${settings.axiosURL}/orders/history`);
-      console.log(response.data);
       setHistory(response.data);
     };
     getHistory();
