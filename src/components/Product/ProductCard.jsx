@@ -31,7 +31,10 @@ export const ProductCard = ({ product }) => {
 
   const handleAddToCart = (event) => {
     event.preventDefault();
-    if (!isAuthenticated) alert("Login to add items to your cart");
+    if (!isAuthenticated) {
+      alert("Login to add items to your cart");
+      return;
+    }
 
     const item = {
       id: product.id,
