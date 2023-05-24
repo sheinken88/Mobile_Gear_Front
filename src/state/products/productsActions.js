@@ -10,7 +10,7 @@ import {
 import * as settings from "../../settings";
 
 export const fetchProducts =
-  (searchTerm = "", filters = {}, categoryName = "") =>
+  (searchTerm = "", filters = {}) =>
   async (dispatch) => {
     dispatch(setLoading(true));
     try {
@@ -18,10 +18,8 @@ export const fetchProducts =
         params: {
           ...filters,
           modelName: searchTerm,
-          categoryName: categoryName,
         },
       });
-      console.log("Response: ", response);
       dispatch(setProducts(response.data));
     } catch (error) {
       dispatch(setError(error.message));
@@ -49,10 +47,9 @@ export const fetchDiscountedProducts = () => async (dispatch) => {
     const response = await axios.get(
       `${settings.axiosURL}/products/discounted`
     );
-    console.log("Discounted products: ", response.data);
+
     dispatch(setDiscountedProducts(response.data));
   } catch (error) {
-    console.log(error);
     dispatch(setError(error.message));
   } finally {
     dispatch(setLoading(false));

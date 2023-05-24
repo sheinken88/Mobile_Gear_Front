@@ -26,6 +26,7 @@ export const AddProducts = ({ setSelectedPanel }) => {
   const discount = useInput();
   const stock = useInput();
   const category = useInput();
+  const brand = useInput();
 
   const dispatch = useDispatch();
 
@@ -33,7 +34,6 @@ export const AddProducts = ({ setSelectedPanel }) => {
 
   useEffect(() => {
     dispatch(fetchCategories());
-    console.log(categories);
   }, [dispatch]);
 
   const [showAlert, setShowAlert] = useState(false);
@@ -49,6 +49,7 @@ export const AddProducts = ({ setSelectedPanel }) => {
       price: parseFloat(price.value),
       discount: parseInt(discount.value),
       stock: Number(stock.value),
+      brandId: Number(brand.value),
       categoryId: Number(category.value),
     };
 
@@ -130,11 +131,24 @@ export const AddProducts = ({ setSelectedPanel }) => {
           </FormControl>
 
           <FormControl>
+            <FormLabel>Brand</FormLabel>
+            <Select id="brand" type="number" {...brand}>
+              {["", "apple", "samsung"].map((brand, i) => {
+                return (
+                  <option value={i} id={i}>
+                    {brand}
+                  </option>
+                );
+              })}
+            </Select>
+          </FormControl>
+
+          <FormControl>
             <FormLabel>Category</FormLabel>
             <Select id="category" type="number" {...category}>
               {categories.map((item) => {
                 return (
-                  <option value={category.id} id={category.id}>
+                  <option value={item.id} id={item.id}>
                     {item.name}
                   </option>
                 );
