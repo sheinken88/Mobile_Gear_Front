@@ -28,7 +28,6 @@ export const CartOrderSummary = () => {
     if (checkoutState.completed && !checkoutState.loading) {
       navigate("/payments");
     } else if (checkoutState.error) {
-      console.log(checkoutError.error);
       alert("error en el checkout");
     }
   }, [checkoutState]);
