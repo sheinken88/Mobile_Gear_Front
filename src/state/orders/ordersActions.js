@@ -5,7 +5,9 @@ import * as settings from "../../settings";
 export const fetchOrders = () => async (dispatch) => {
   dispatch(setLoading(true));
   try {
-    const response = await axios.get(`${settings.axiosURL}/admin/orders`);
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/admin/orders`
+    );
 
     dispatch(setOrders(response.data));
   } catch (error) {

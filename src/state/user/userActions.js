@@ -5,11 +5,14 @@ import * as settings from "../../settings";
 
 export const registerUser = (username, email, password) => async (dispatch) => {
   try {
-    const response = await axios.post(`${settings.axiosURL}/users/signup`, {
-      username,
-      email,
-      password,
-    });
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}/users/signup`,
+      {
+        username,
+        email,
+        password,
+      }
+    );
 
     const userData = response.data;
     dispatch(register(userData));
@@ -20,12 +23,14 @@ export const registerUser = (username, email, password) => async (dispatch) => {
 
 export const loginUser = (email, password) => async (dispatch) => {
   try {
-    await axios.post(`${settings.axiosURL}/users/login`, {
+    await axios.post(`${import.meta.env.VITE_API_URL}/users/login`, {
       email,
       password,
     });
 
-    const payload = await axios.get(`${settings.axiosURL}/users/secret`);
+    const payload = await axios.get(
+      `${import.meta.env.VITE_API_URL}/users/secret`
+    );
 
     const userData = payload.data;
     await dispatch(login(userData));
@@ -36,7 +41,7 @@ export const loginUser = (email, password) => async (dispatch) => {
 
 export const logoutUser = () => async (dispatch) => {
   try {
-    await axios.post(`${settings.axiosURL}/users/logout`);
+    await axios.post(`${import.meta.env.VITE_API_URL}/users/logout`);
     dispatch(logout());
   } catch (error) {
     console.error("Login error:", error);
@@ -45,7 +50,9 @@ export const logoutUser = () => async (dispatch) => {
 
 export const fetchUsers = () => async (dispatch) => {
   try {
-    const response = await axios.get(`${settings.axiosURL}/admin/users`);
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/admin/users`
+    );
     dispatch(list(response.data));
   } catch (error) {
     console.error("Fetch error:", error);

@@ -8,7 +8,9 @@ export const History = () => {
 
   useEffect(() => {
     const getHistory = async () => {
-      const response = await axios.get(`${settings.axiosURL}/orders/history`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/orders/history`
+      );
       setHistory(response.data);
     };
     getHistory();

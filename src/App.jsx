@@ -31,7 +31,7 @@ function App() {
 
   useEffect(() => {
     async function fetchUser() {
-      const user = await axios.get(`${settings.axiosURL}/users/me`);
+      const user = await axios.get(`${import.meta.env.VITE_API_URL}/users/me`);
       await dispatch(login(user.data));
     }
     fetchUser();

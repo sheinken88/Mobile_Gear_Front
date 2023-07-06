@@ -15,7 +15,7 @@ export const UsersDashboard = () => {
   }, [dispatch]);
 
   const handleSwitch = async (id) => {
-    await axios.put(`${settings.axiosURL}/admin/users/${id}`);
+    await axios.put(`${import.meta.env.VITE_API_URL}/admin/users/${id}`);
     dispatch(fetchUsers());
   };
 

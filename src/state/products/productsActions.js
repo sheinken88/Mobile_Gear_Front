@@ -14,12 +14,15 @@ export const fetchProducts =
   async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const response = await axios.get(`${settings.axiosURL}/products`, {
-        params: {
-          ...filters,
-          modelName: searchTerm,
-        },
-      });
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/products`,
+        {
+          params: {
+            ...filters,
+            modelName: searchTerm,
+          },
+        }
+      );
       dispatch(setProducts(response.data));
     } catch (error) {
       dispatch(setError(error.message));
@@ -31,7 +34,7 @@ export const fetchProducts =
 export const fetchProduct = (productId) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `${settings.axiosURL}/products/${productId}`
+      `${import.meta.env.VITE_API_URL}/products/${productId}`
     );
     dispatch(setProduct(response.data));
   } catch {
@@ -45,7 +48,7 @@ export const fetchDiscountedProducts = () => async (dispatch) => {
   dispatch(setLoading(true));
   try {
     const response = await axios.get(
-      `${settings.axiosURL}/products/discounted`
+      `${import.meta.env.VITE_API_URL}/products/discounted`
     );
 
     dispatch(setDiscountedProducts(response.data));
@@ -58,7 +61,10 @@ export const fetchDiscountedProducts = () => async (dispatch) => {
 
 export const addProduct = (productData) => async () => {
   try {
-    await axios.post(`${settings.axiosURL}/admin/products`, productData);
+    await axios.post(
+      `${import.meta.env.VITE_API_URL}/admin/products`,
+      productData
+    );
   } catch (error) {
     console.error("Login error:", error);
   }
@@ -76,7 +82,7 @@ export const editProduct = (product) => async () => {
       features,
       product_img,
     } = product;
-    await axios.put(`${settings.axiosURL}/admin/products/${id}`, {
+    await axios.put(`${import.meta.env.VITE_API_URL}/admin/products/${id}`, {
       name,
       description,
       stock,
@@ -92,7 +98,9 @@ export const editProduct = (product) => async () => {
 
 export const deleteProduct = (productId) => async (dispatch) => {
   try {
-    await axios.delete(`${settings.axiosURL}/admin/products/${productId}`);
+    await axios.delete(
+      `${import.meta.env.VITE_API_URL}/admin/products/${productId}`
+    );
     dispatch(deleteProductAction(productId));
   } catch (error) {
     console.error("delete error: ", error);
