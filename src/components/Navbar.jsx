@@ -28,6 +28,7 @@ import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../state/user/userActions";
 
 import { fetchProduct } from "../state/products/productsActions";
+import { clearCart } from "../state/cart/cartSlice";
 
 export const Navbar = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -62,6 +63,7 @@ export const Navbar = () => {
   };
 
   const handleLogout = () => {
+    dispatch(clearCart());
     dispatch(logoutUser());
     navigate("/");
   };

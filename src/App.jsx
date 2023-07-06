@@ -21,6 +21,7 @@ import * as settings from "../src/settings";
 import { login } from "./state/user/userSlice";
 import { fetchProducts } from "./state/products/productsActions";
 import { useDispatch } from "react-redux";
+import { clearCart } from "./state/cart/cartSlice";
 
 function App() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -29,11 +30,13 @@ function App() {
   const userData = useSelector((state) => state.user.userData);
   const dispatch = useDispatch();
 
+  async function fetchUser() {
+    const user = await axios.get(`${settings.axiosURL}/users/me`);
+    await dispatch(login(user.data));
+  }
+
   useEffect(() => {
-    async function fetchUser() {
-      const user = await axios.get(`${settings.axiosURL}/users/me`);
-      await dispatch(login(user.data));
-    }
+    dispatch(clearCart());
     fetchUser();
   }, []);
 
