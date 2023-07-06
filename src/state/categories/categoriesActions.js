@@ -10,7 +10,9 @@ import * as settings from "../../settings";
 export const fetchCategories = () => async (dispatch) => {
   dispatch(setLoading(true));
   try {
-    const response = await axios.get(`${settings.axiosURL}/categories`);
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/categories`
+    );
     dispatch(setCategories(response.data));
   } catch (error) {
     dispatch(setError(error.message));
@@ -21,7 +23,7 @@ export const fetchCategories = () => async (dispatch) => {
 
 export const addCategory = (name) => async () => {
   try {
-    await axios.post(`${settings.axiosURL}/categories`, {
+    await axios.post(`${import.meta.env.VITE_API_URL}/categories`, {
       name,
     });
   } catch (error) {
@@ -32,7 +34,7 @@ export const addCategory = (name) => async () => {
 export const editCategory = (category) => async () => {
   try {
     const { id, name } = category;
-    await axios.put(`${settings.axiosURL}/categories/${id}`, {
+    await axios.put(`${import.meta.env.VITE_API_URL}/categories/${id}`, {
       name,
     });
   } catch (error) {
@@ -42,7 +44,9 @@ export const editCategory = (category) => async () => {
 
 export const deleteCategory = (categoryId) => async (dispatch) => {
   try {
-    await axios.delete(`${settings.axiosURL}/categories/${categoryId}`);
+    await axios.delete(
+      `${import.meta.env.VITE_API_URL}/categories/${categoryId}`
+    );
     dispatch(deleteCategoryAction(categoryId));
   } catch (error) {
     console.error("delete error: ", error);
